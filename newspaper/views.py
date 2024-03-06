@@ -1,7 +1,10 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView
 
+from newspaper.forms import NewspaperForm
 from newspaper.models import Redactor, Topic, Newspaper
 
 
@@ -33,5 +36,17 @@ class TopicListView(ListView):
     model = Topic
 
 
+class TopicCreateView(CreateView):
+    model = Topic
+    fields = "__all__"
+    success_url = reverse_lazy("newspaper:topics")
+
+
 class NewspaperListView(ListView):
     model = Newspaper
+
+
+class NewspaperCreateView(LoginRequiredMixin, CreateView):
+    model = Newspaper
+    form_class = NewspaperForm
+    success_url = reverse_lazy("newspaper:newspapers")

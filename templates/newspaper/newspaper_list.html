@@ -3,13 +3,20 @@
 {% block content %}
   <h1>
     Newspaper list
+    <a href="{% url 'newspaper:newspaper-create' %}" class="btn btn-primary link-to-page">
+      Create a new newspaper
+    </a>
   </h1>
   {% if newspaper_list %}
     <ul>
       {% for newspaper in newspaper_list %}
         <h2>{{ newspaper.title }}</h2>
+        <a>{{ newspaper.topic }}</a>
         <p>
-          Published on {{ newspaper.published_date }} by {{ newspaper.publishers.name }}
+          Published on {{ newspaper.published_date }} by
+          {% for publisher in newspaper.publishers.all %}
+            {{ publisher.username }}
+          {% endfor %}
         </p>
         <p>
           {{ newspaper.content }}

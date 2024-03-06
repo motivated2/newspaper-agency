@@ -2,7 +2,10 @@
 
 {% block content %}
   <h1>
-    Topic list    
+    Topic list
+    <a href="{% url 'newspaper:topic-create' %}" class="btn btn-primary link-to-page">
+      Add a new topic
+    </a>
   </h1>
   {% if topic_list %}
     <ul>
