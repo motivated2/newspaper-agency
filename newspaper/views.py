@@ -5,7 +5,6 @@ from django.views.generic import ListView
 from newspaper.models import Redactor, Topic, Newspaper
 
 
-@login_required
 def index(request):
     """View function for the home page of the site."""
 
