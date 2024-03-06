@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block content %}
+  <h1>
+    Newspaper list
+  </h1>
+  {% if newspaper_list %}
+    <ul>
+      {% for newspaper in newspaper_list %}
+        <h2>{{ newspaper.title }}</h2>
+        <p>
+          Published on {{ newspaper.published_date }} by {{ newspaper.publishers.name }}
+        </p>
+        <p>
+          {{ newspaper.content }}
+        </p>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>There are no newspapers</p>
+  {% endif %}
+{% endblock %}
