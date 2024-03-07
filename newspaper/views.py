@@ -120,3 +120,9 @@ class NewspaperCreateView(LoginRequiredMixin, CreateView):
 class NewspaperDeleteView(LoginRequiredMixin, DeleteView):
     model = Newspaper
     success_url = reverse_lazy("newspaper:newspapers")
+
+
+class NewspaperUpdateView(LoginRequiredMixin, UpdateView):
+    model = Newspaper
+    form_class = NewspaperForm
+    success_url = reverse_lazy("newspaper:newspapers")

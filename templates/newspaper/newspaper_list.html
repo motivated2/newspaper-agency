@@ -1,38 +1,79 @@
-{% extends "base.html" %}
+{% extends 'layouts/base_background.html' %}
 {% load crispy_forms_filters %}
+{% load static %}
+
+{% block title %} Material Kit 2 by Creative Tim {% endblock title %}
+{% block body %} class="blog-author bg-gray-200" {% endblock body %}
+
+{% block header %}
+
+  {% include 'includes/navigation.html' %}
+
+{% endblock header %}
 
 {% block content %}
-  <form action="" method="get" class="form-inline">
-    {{ search_form|crispy }}
-    <input class="button btn-primary" type="submit" value="🔍">
-  </form>
-  <h1>
-    Newspaper list
-    <a href="{% url 'newspaper:newspaper-create' %}" class="btn btn-primary link-to-page">
-      Create a new newspaper
-    </a>
-  </h1>
-  {% if newspaper_list %}
-    <ul>
-      {% for newspaper in newspaper_list %}
-        <h2><a href="{% url 'newspaper:newspaper-detail' pk=newspaper.id %}">{{ newspaper.title }}</a></h2>
-        <a>
-          {% for topic in newspaper.topics.all %}
-            {{ topic.name }}
-          {% endfor %}
-        </a>
-        <p>
-          Published on {{ newspaper.published_date }} by
-          {% for publisher in newspaper.publishers.all %}
-            {{ publisher.username }}
-          {% endfor %}
-        </p>
-        <p>
-          {{ newspaper.content|truncatewords:50 }}
-        </p>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>There are no newspapers</p>
-  {% endif %}
-{% endblock %}
+
+  <!-- -------- START HEADER 4 w/ search book a ticket form ------- -->
+  <header>
+    <div class="page-header min-height-400" style="background-image: url('{% static 'img/city-profile.jpg' %}');"
+         loading="lazy">
+      <span class="mask bg-gradient-dark opacity-8"></span>
+    </div>
+  </header>
+  <!-- -------- END HEADER 4 w/ search book a ticket form ------- -->
+  <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6 mb-4">
+    <!-- START Testimonials w/ user image & text & info -->
+
+    <!-- START Blogs w/ 4 cards w/ image & text & link -->
+    <section class="py-3">
+      <a href="{% url 'newspaper:newspaper-create' %}" class="btn btn-primary link-to-page float-end">
+        Create a new newspaper
+      </a>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <h3 class="mb-5">Check our latest newspapers</h3>
+          </div>
+        </div>
+
+        <form action="" method="get" class="form-inline" data-width="auto">
+          {{ search_form|crispy }}
+          <input class="btn btn-primary" type="submit" value="Search 🔍">
+        </form>
+        <br>
+        <div class="row">
+          {% if newspaper_list %}
+            <ul>
+              {% for newspaper in newspaper_list %}
+                <h5><a href="{% url 'newspaper:newspaper-detail' pk=newspaper.id %}">{{ newspaper.title }}</a></h5>
+                <a>
+                  {% for topic in newspaper.topics.all %}
+                    {{ topic.name }}
+                  {% endfor %}
+                </a>
+                <p>
+                  Published on {{ newspaper.published_date }} by
+                  {% for publisher in newspaper.publishers.all %}
+                    {{ publisher.username }}
+                  {% endfor %}
+                </p>
+                <p>
+                  {{ newspaper.content|truncatewords:50 }}
+                </p>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>There are no newspapers</p>
+          {% endif %}
+          {% include "includes/pagination.html" %}
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock content %}
+
+{% block footer %}
+
+  {% include 'includes/footer.html' %}
+
+{% endblock footer %}

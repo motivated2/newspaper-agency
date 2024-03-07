@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap4',
     'debug_toolbar',
+    'theme_material_kit',
 ]
 
 MIDDLEWARE = [
@@ -131,6 +132,8 @@ AUTH_USER_MODEL = 'newspaper.Redactor'
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = '/'
 
 INTERNAL_IPS = [
     "127.0.0.1",

@@ -1,21 +1,49 @@
-{% extends "base.html" %}
+{% extends 'layouts/base_background.html' %}
+{% load crispy_forms_filters %}
+{% load static %}
+
+{% block title %} Material Kit 2 by Creative Tim {% endblock title %}
+{% block body %} class="blog-author bg-gray-200" {% endblock body %}
+
+{% block header %}
+
+  {% include 'includes/navigation.html' %}
+
+{% endblock header %}
 
 {% block content %}
-  <h1>
-    Topic list
-    <a href="{% url 'newspaper:topic-create' %}" class="btn btn-primary link-to-page">
-      Add a new topic
-    </a>
-  </h1>
-  {% if topic_list %}
-    <ul>
-      {% for topic in topic_list %}
-        <li>
-          {{ topic.name }}
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>There are no topics in newspaper</p>
-  {% endif %}
-{% endblock %}
+  <header>
+    <div class="page-header min-height-400" style="background-image: url('{% static 'img/city-profile.jpg' %}');"
+         loading="lazy">
+      <span class="mask bg-gradient-dark opacity-8"></span>
+    </div>
+  </header>
+  <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6 mb-4">
+    <section class="py-3">
+      <div class="container">
+
+          <h3>
+            Topic list
+            <a href="{% url 'newspaper:topic-create' %}" class="btn btn-primary link-to-page float-end">
+              Add a new topic
+            </a>
+          </h3>
+          {% if topic_list %}
+            {% for topic in topic_list %}
+              <span class="badge bg-gradient-primary">{{ topic.name }}</span>
+            {% endfor %}
+          {% else %}
+            <p>There are no topics in newspaper</p>
+          {% endif %}
+
+      </div>
+    </section>
+  </div>
+
+{% endblock content %}
+
+{% block footer %}
+
+  {% include 'includes/footer.html' %}
+
+{% endblock footer %}
