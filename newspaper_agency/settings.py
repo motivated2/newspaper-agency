@@ -37,16 +37,19 @@ INSTALLED_APPS = [
     'newspaper',
     'crispy_forms',
     'crispy_bootstrap4',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'newspaper_agency.urls'
@@ -128,3 +131,7 @@ AUTH_USER_MODEL = 'newspaper.Redactor'
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 LOGIN_REDIRECT_URL = '/'
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]

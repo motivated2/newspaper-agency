@@ -1,9 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView
 
-from newspaper.forms import NewspaperForm, RedactorCreationForm
+from newspaper.forms import NewspaperForm, RedactorCreationForm, RedactorUpdateForm, NewspaperSearchForm, \
+    RedactorSearchForm
 from newspaper.models import Redactor, Topic, Newspaper
 
 
@@ -31,6 +32,24 @@ class RedactorListView(ListView):
     model = Redactor
     paginate_by = 5
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(RedactorListView, self).get_context_data(**kwargs)
+
+        username = self.request.GET.get("username", "")
+
+        context["search_form"] = RedactorSearchForm(initial={"username": username})
+        return context
+
+    def get_queryset(self):
+        form = RedactorSearchForm(self.request.GET)
+        queryset = super().get_queryset()
+
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            if username:
+                queryset = queryset.filter(username__icontains=username)
+        return queryset
+
 
 class RedactorDetailView(DetailView):
     model = Redactor
@@ -40,6 +59,12 @@ class RedactorCreateView(CreateView):
     model = Redactor
     form_class = RedactorCreationForm
     success_url = reverse_lazy("newspaper:index")
+
+
+class RedactorUpdateView(UpdateView):
+    model = Redactor
+    form_class = RedactorUpdateForm
+    success_url = reverse_lazy("newspaper:redactors")
 
 
 class TopicListView(ListView):
@@ -56,6 +81,25 @@ class TopicCreateView(CreateView):
 class NewspaperListView(ListView):
     model = Newspaper
     paginate_by = 5
+    queryset = Newspaper.objects.prefetch_related("topics").prefetch_related("publishers")
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(NewspaperListView, self).get_context_data(**kwargs)
+
+        title = self.request.GET.get("title", "")
+
+        context["search_form"] = NewspaperSearchForm(initial={"title": title})
+        return context
+
+    def get_queryset(self):
+        form = NewspaperSearchForm(self.request.GET)
+        queryset = super().get_queryset()
+
+        if form.is_valid():
+            title = form.cleaned_data.get("title")
+            if title:
+                queryset = queryset.filter(title__icontains=title)
+        return queryset
 
 
 class NewspaperDetailView(DetailView):
