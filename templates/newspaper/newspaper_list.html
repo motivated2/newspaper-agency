@@ -11,7 +11,11 @@
     <ul>
       {% for newspaper in newspaper_list %}
         <h2><a href="{% url 'newspaper:newspaper-detail' pk=newspaper.id %}">{{ newspaper.title }}</a></h2>
-        <a>{{ newspaper.topic }}</a>
+        <a>
+          {% for topic in newspaper.topics.all %}
+            {{ topic.name }}
+          {% endfor %}
+        </a>
         <p>
           Published on {{ newspaper.published_date }} by
           {% for publisher in newspaper.publishers.all %}

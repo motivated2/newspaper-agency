@@ -6,6 +6,11 @@
 
 {% block content %}
   <h1>{{ newspaper.title }}</h1>
+  <a>
+    {% for topic in newspaper.topics.all %}
+      {{ topic.name }}
+    {% endfor %}
+  </a>
   <p>{{ newspaper.content }}</p>
   <p>Published on {{ newspaper.published_date }} </p>
   <p>Redactors:
