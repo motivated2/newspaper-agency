@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block content %}
+  <a href="{% url 'newspaper:newspaper-delete' pk=newspaper.id %}" class="btn btn-danger link-to-page">
+    Delete this newspaper
+  </a>
   <h1>{{ newspaper.title }}</h1>
   <a>
     {% for topic in newspaper.topics.all %}

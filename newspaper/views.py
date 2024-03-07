@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView, UpdateView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
 from newspaper.forms import NewspaperForm, RedactorCreationForm, RedactorUpdateForm, NewspaperSearchForm, \
     RedactorSearchForm
@@ -55,15 +55,20 @@ class RedactorDetailView(DetailView):
     model = Redactor
 
 
-class RedactorCreateView(CreateView):
+class RedactorCreateView(LoginRequiredMixin, CreateView):
     model = Redactor
     form_class = RedactorCreationForm
     success_url = reverse_lazy("newspaper:index")
 
 
-class RedactorUpdateView(UpdateView):
+class RedactorUpdateView(LoginRequiredMixin, UpdateView):
     model = Redactor
     form_class = RedactorUpdateForm
+    success_url = reverse_lazy("newspaper:redactors")
+
+
+class RedactorDeleteView(LoginRequiredMixin, DeleteView):
+    model = Redactor
     success_url = reverse_lazy("newspaper:redactors")
 
 
@@ -72,7 +77,7 @@ class TopicListView(ListView):
     paginate_by = 10
 
 
-class TopicCreateView(CreateView):
+class TopicCreateView(LoginRequiredMixin, CreateView):
     model = Topic
     fields = "__all__"
     success_url = reverse_lazy("newspaper:topics")
@@ -109,4 +114,9 @@ class NewspaperDetailView(DetailView):
 class NewspaperCreateView(LoginRequiredMixin, CreateView):
     model = Newspaper
     form_class = NewspaperForm
+    success_url = reverse_lazy("newspaper:newspapers")
+
+
+class NewspaperDeleteView(LoginRequiredMixin, DeleteView):
+    model = Newspaper
     success_url = reverse_lazy("newspaper:newspapers")
