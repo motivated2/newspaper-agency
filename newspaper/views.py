@@ -1,10 +1,9 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
 
-from newspaper.forms import NewspaperForm
+from newspaper.forms import NewspaperForm, RedactorCreationForm
 from newspaper.models import Redactor, Topic, Newspaper
 
 
@@ -30,14 +29,22 @@ def index(request):
 
 class RedactorListView(ListView):
     model = Redactor
+    paginate_by = 5
 
 
 class RedactorDetailView(DetailView):
     model = Redactor
 
 
+class RedactorCreateView(CreateView):
+    model = Redactor
+    form_class = RedactorCreationForm
+    success_url = reverse_lazy("newspaper:index")
+
+
 class TopicListView(ListView):
     model = Topic
+    paginate_by = 10
 
 
 class TopicCreateView(CreateView):
@@ -48,6 +55,7 @@ class TopicCreateView(CreateView):
 
 class NewspaperListView(ListView):
     model = Newspaper
+    paginate_by = 5
 
 
 class NewspaperDetailView(DetailView):

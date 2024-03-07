@@ -1,11 +1,12 @@
 from django.urls import path
 
 from newspaper.views import index, RedactorListView, TopicListView, NewspaperListView, NewspaperCreateView, \
-    TopicCreateView, RedactorDetailView, NewspaperDetailView
+    TopicCreateView, RedactorDetailView, NewspaperDetailView, RedactorCreateView
 
 urlpatterns = [
     path('', index, name='index'),
     path('redactors/', RedactorListView.as_view(), name='redactors'),
+    path('redactors/create', RedactorCreateView.as_view(), name='redactor-create'),
     path('redactors/<int:pk>/', RedactorDetailView.as_view(), name='redactor-detail'),
     path('topics/', TopicListView.as_view(), name='topics'),
     path('topics/create/', TopicCreateView.as_view(), name='topic-create'),
