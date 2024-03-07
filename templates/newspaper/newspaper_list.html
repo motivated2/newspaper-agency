@@ -10,7 +10,7 @@
   {% if newspaper_list %}
     <ul>
       {% for newspaper in newspaper_list %}
-        <h2>{{ newspaper.title }}</h2>
+        <h2><a href="{% url 'newspaper:newspaper-detail' pk=newspaper.id %}">{{ newspaper.title }}</a></h2>
         <a>{{ newspaper.topic }}</a>
         <p>
           Published on {{ newspaper.published_date }} by
@@ -19,7 +19,7 @@
           {% endfor %}
         </p>
         <p>
-          {{ newspaper.content }}
+          {{ newspaper.content|truncatewords:50 }}
         </p>
       {% endfor %}
     </ul>

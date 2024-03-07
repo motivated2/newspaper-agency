@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <p><strong>Username:</strong> {{ redactor.username }}</p>
+  <p><strong>First name:</strong> {{ redactor.first_name }}</p>
+  <p><strong>Last name:</strong> {{ redactor.last_name }}</p>
+  <p><strong>Years of experience:</strong> {{ redactor.years_of_experience }}</p>
+  <p><strong>Is staff:</strong> {{ redactor.is_staff }}</p>
+
+  <div class="ml-3">
+    <h4>Newspapers</h4>
+
+    {% for newspaper in redactor.newspapers.all %}
+      <hr>
+      <p><strong>Title:</strong> {{ newspaper.title }}</p>
+      <p><strong>Topic:</strong> {{ newspaper.topic }}</p>
+      <p><strong>Published:</strong> {{ newspaper.published_date }}</p>
+      <p><strong>Publishers:</strong>
+        {% for publisher in newspaper.publishers.all %}
+          {{ publisher.username }}
+        {% endfor %}
+      </p>
+      <p class="text-muted"><strong>Id:</strong> {{ newspaper.id }}</p>
+
+    {% empty %}
+      <p>No newspapers!</p>
+    {% endfor %}
+  </div>
+{% endblock %}

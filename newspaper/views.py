@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 
 from newspaper.forms import NewspaperForm
 from newspaper.models import Redactor, Topic, Newspaper
@@ -32,6 +32,10 @@ class RedactorListView(ListView):
     model = Redactor
 
 
+class RedactorDetailView(DetailView):
+    model = Redactor
+
+
 class TopicListView(ListView):
     model = Topic
 
@@ -43,6 +47,10 @@ class TopicCreateView(CreateView):
 
 
 class NewspaperListView(ListView):
+    model = Newspaper
+
+
+class NewspaperDetailView(DetailView):
     model = Newspaper
 
 
