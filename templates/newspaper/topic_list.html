@@ -13,7 +13,7 @@
 
 {% block content %}
   <header>
-    <div class="page-header min-height-400" style="background-image: url('{% static 'img/city-profile.jpg' %}');"
+    <div class="page-header min-height-400" style="background-image: url('{% static 'img/pexels-suzy-hazelwood-3886870.jpg' %}');"
          loading="lazy">
       <span class="mask bg-gradient-dark opacity-8"></span>
     </div>
@@ -31,6 +31,7 @@
           {% if topic_list %}
             {% for topic in topic_list %}
               <span class="badge bg-gradient-primary">{{ topic.name }}</span>
+              <br>
             {% endfor %}
           {% else %}
             <p>There are no topics in newspaper</p>
@@ -41,9 +42,3 @@
   </div>
 
 {% endblock content %}
-
-{% block footer %}
-
-  {% include 'includes/footer.html' %}
-
-{% endblock footer %}

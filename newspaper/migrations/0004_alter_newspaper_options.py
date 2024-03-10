@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('newspaper', '0003_rename_topic_newspaper_topics'),
+        ("newspaper", "0003_rename_topic_newspaper_topics"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='newspaper',
-            options={'ordering': ['-published_date']},
+            name="newspaper",
+            options={"ordering": ["-published_date"]},
         ),
     ]

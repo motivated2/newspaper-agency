@@ -7,7 +7,7 @@ from newspaper.models import Newspaper, Redactor
 class NewspaperForm(forms.ModelForm):
     class Meta:
         model = Newspaper
-        fields = '__all__'
+        fields = "__all__"
 
 
 class NewspaperSearchForm(forms.Form):
@@ -15,16 +15,14 @@ class NewspaperSearchForm(forms.Form):
         max_length=255,
         required=False,
         label="",
-        widget=forms.TextInput(attrs={"placeholder": "Search by title"})
+        widget=forms.TextInput(attrs={"placeholder": "Search by title"}),
     )
 
 
 class RedactorCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = Redactor
-        fields = UserCreationForm.Meta.fields + (
-            "years_of_experience",
-        )
+        fields = UserCreationForm.Meta.fields + ("years_of_experience",)
 
 
 class RedactorUpdateForm(forms.ModelForm):
@@ -38,5 +36,5 @@ class RedactorSearchForm(forms.Form):
         max_length=255,
         required=False,
         label="",
-        widget=forms.TextInput(attrs={"placeholder": "Search by username"})
+        widget=forms.TextInput(attrs={"placeholder": "Search by username"}),
     )

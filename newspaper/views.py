@@ -1,10 +1,21 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import (
+    ListView,
+    CreateView,
+    DetailView,
+    UpdateView,
+    DeleteView,
+)
 
-from newspaper.forms import NewspaperForm, RedactorCreationForm, RedactorUpdateForm, NewspaperSearchForm, \
-    RedactorSearchForm
+from newspaper.forms import (
+    NewspaperForm,
+    RedactorCreationForm,
+    RedactorUpdateForm,
+    NewspaperSearchForm,
+    RedactorSearchForm,
+)
 from newspaper.models import Redactor, Topic, Newspaper
 
 
@@ -86,7 +97,9 @@ class TopicCreateView(LoginRequiredMixin, CreateView):
 class NewspaperListView(ListView):
     model = Newspaper
     paginate_by = 5
-    queryset = Newspaper.objects.prefetch_related("topics").prefetch_related("publishers")
+    queryset = Newspaper.objects.prefetch_related("topics").prefetch_related(
+        "publishers"
+    )
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(NewspaperListView, self).get_context_data(**kwargs)
