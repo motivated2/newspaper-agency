@@ -5,6 +5,7 @@ from newspaper.models import Newspaper, Redactor
 
 
 class NewspaperForm(forms.ModelForm):
+
     class Meta:
         model = Newspaper
         fields = "__all__"
@@ -20,12 +21,14 @@ class NewspaperSearchForm(forms.Form):
 
 
 class RedactorCreationForm(UserCreationForm):
+
     class Meta(UserCreationForm.Meta):
         model = Redactor
         fields = UserCreationForm.Meta.fields + ("years_of_experience",)
 
 
 class RedactorUpdateForm(forms.ModelForm):
+
     class Meta:
         model = Redactor
         fields = ["first_name", "last_name", "years_of_experience"]

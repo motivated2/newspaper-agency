@@ -4,6 +4,7 @@ from datetime import date
 
 
 class ModelTestCase(TestCase):
+
     def setUp(self):
         self.redactor = Redactor.objects.create_user(
             username="redactor1",
