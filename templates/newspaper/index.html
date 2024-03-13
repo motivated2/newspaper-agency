@@ -1,0 +1,64 @@
+{% extends 'layouts/base_background.html' %}
+{% load static %}
+
+{% block title %} Newspaper agency by Bondarenko Ihor {% endblock title %}
+
+{% block body %} class="index-page bg-gray-200" {% endblock body %}
+
+{% block content %}
+
+  <header class="header-2">
+    <div class="page-header min-vh-75 relative" style="background-image: url('{% static 'img/pexels-brotin-biswas-518543.jpg' %}')">
+      <span class="mask bg-gradient-primary opacity-3"></span>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 text-center mx-auto">
+            <h1 class="text-white pt-3 mt-n5">Newspaper agency</h1>
+            <p class="lead text-white mt-3">
+              Not your regular newspaper agency    
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
+
+    <section class="pt-3 pb-4" id="count-stats">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9 mx-auto py-3">
+            <div class="row">
+              <div class="col-md-4 position-relative">
+                <div class="p-3 text-center">
+                  <h1 class="text-gradient text-primary">{{ num_newspapers }}</h1>
+                  <h5 class="mt-3">Newspapers</h5>
+                  <p class="text-sm font-weight-normal">The best newspapers you have read in your life.</p>
+                </div>
+                <hr class="vertical dark">
+              </div>
+              <div class="col-md-4 position-relative">
+                <div class="p-3 text-center">
+                  <h1 class="text-gradient text-primary">{{ num_topics }}</h1>
+                  <h5 class="mt-3">Topics</h5>
+                  <p class="text-sm font-weight-normal">From crime to IT, we have everything!</p>
+                </div>
+                <hr class="vertical dark">
+              </div>
+              <div class="col-md-4">
+                <div class="p-3 text-center">
+                  <h1 class="text-gradient text-primary">{{ num_redactors }}</h1>
+                  <h5 class="mt-3">Redactors</h5>
+                  <p class="text-sm font-weight-normal">The best redactors in the entire World!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+{% endblock %}
+{% block footer %}
+{% endblock %}
