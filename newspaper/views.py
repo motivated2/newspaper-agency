@@ -14,7 +14,7 @@ from newspaper.forms import (
     RedactorCreationForm,
     RedactorUpdateForm,
     NewspaperSearchForm,
-    RedactorSearchForm,
+    RedactorSearchForm, TopicForm, TopicSearchForm,
 )
 from newspaper.models import Redactor, Topic, Newspaper
 
@@ -85,12 +85,42 @@ class RedactorDeleteView(LoginRequiredMixin, DeleteView):
 
 class TopicListView(ListView):
     model = Topic
-    paginate_by = 10
+    paginate_by = 5
+    queryset = Topic.objects.all()
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(TopicListView, self).get_context_data(**kwargs)
+
+        name = self.request.GET.get("name", "")
+
+        context["search_form"] = TopicSearchForm(initial={"name": name})
+        return context
+
+    def get_queryset(self):
+        form = TopicSearchForm(self.request.GET)
+        queryset = super().get_queryset()
+
+        if form.is_valid():
+            name = form.cleaned_data.get("name")
+            if name:
+                queryset = queryset.filter(name__icontains=name)
+        return queryset
 
 
 class TopicCreateView(LoginRequiredMixin, CreateView):
     model = Topic
-    fields = "__all__"
+    form_class = TopicForm
+    success_url = reverse_lazy("newspaper:topics")
+
+
+class TopicUpdateView(LoginRequiredMixin, UpdateView):
+    model = Topic
+    form_class = TopicForm
+    success_url = reverse_lazy("newspaper:topics")
+
+
+class TopicDeleteView(LoginRequiredMixin, DeleteView):
+    model = Topic
     success_url = reverse_lazy("newspaper:topics")
 
 
