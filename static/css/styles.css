@@ -9,6 +9,17 @@ input[type="text"]:focus {
     border: 1px solid deeppink;
 }
 
+input[type="password"] {
+    color: #000000;
+    border: 1px solid deeppink;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+input[type="password"]:focus {
+    border: 1px solid deeppink;
+}
+
 .textarea.form-control {
     color: #000000;
     border: 1px solid deeppink;
