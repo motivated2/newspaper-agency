@@ -5,6 +5,15 @@ from newspaper.models import Newspaper, Redactor, Topic
 
 
 class NewspaperForm(forms.ModelForm):
+    topics = forms.ModelMultipleChoiceField(
+        queryset=Topic.objects.all(),
+        widget=forms.CheckboxSelectMultiple()
+    )
+    publishers = forms.ModelMultipleChoiceField(
+        queryset=Redactor.objects.all(),
+        widget=forms.CheckboxSelectMultiple()
+    )
+
     class Meta:
         model = Newspaper
         fields = "__all__"

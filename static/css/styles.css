@@ -9,6 +9,13 @@ input[type="text"]:focus {
     border: 1px solid deeppink;
 }
 
+.textarea.form-control {
+    color: #000000;
+    border: 1px solid deeppink;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 input[type="number"] {
     color: #000000;
     border: 1px solid deeppink;
@@ -18,7 +25,13 @@ input[type="number"] {
 input[type="number"]:focus {
     border: 1px solid deeppink;
 }
+.form-check {
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid pink;
+    margin-bottom: 5px;
 
+}
 /* Style the form - display items horizontally */
 .form-inline {
     display: flex;
